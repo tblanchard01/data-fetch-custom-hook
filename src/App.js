@@ -1,18 +1,12 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-const url = "https://dummyjson.com/todos";
+import { useFetchTodos } from "./hooks";
 function App() {
-  const [todos, setTodos] = useState([]);
-  console.log(todos);
-  useEffect(() => {
-    fetch(url)
-      .then((data) => data.json())
-      .then(({ todos }) => setTodos(todos));
-  }, []);
+  const todos = useFetchTodos();
   return (
     <div className="App">
-      {todos.map(({todo}) =>  <div>{todo}</div>
-      )}
+      {todos.map(({ todo }, i) => (
+        <div key={i}>{todo}</div>
+      ))}
     </div>
   );
 }
